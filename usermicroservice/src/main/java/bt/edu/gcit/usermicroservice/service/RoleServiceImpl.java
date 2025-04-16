@@ -1,5 +1,7 @@
 package bt.edu.gcit.usermicroservice.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +20,21 @@ public class RoleServiceImpl implements RoleService {
     @Transactional
     @Override
     public void addRole(Role role) {
-        // TODO Auto-generated method stub
         roleDAO.addRole(role);
+    }
+
+    @Override
+    public List<Role> getAllRoles() {
+        return roleDAO.getAllRoles();
+    }
+
+    @Override
+    public Role findByID(int id) {
+        return roleDAO.findByID(id);
+    }
+
+    @Override
+    public void deleteByID(int id) {
+        roleDAO.deleteByID(id);
     }
 }
