@@ -119,7 +119,7 @@ public class UserServiceImpl implements UserService {
         photo.transferTo(uploadPath);
 
         user.setPhoto(filename);
-        save(user);
+        userDAO.JustSave(user);
 
     }
 

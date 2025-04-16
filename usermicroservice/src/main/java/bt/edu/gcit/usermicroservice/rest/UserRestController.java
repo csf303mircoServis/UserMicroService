@@ -49,12 +49,12 @@ public class UserRestController {
 
     @PostMapping(value = "/users", consumes = "multipart/form-data")
     public User save(
-            @RequestPart("firstName") @Valid @NotNull String firstName,
-            @RequestPart("lastName") @Valid @NotNull String lastName,
-            @RequestPart("email") @Valid @NotNull String email,
-            @RequestPart("password") @Valid @NotNull String password,
-            @RequestPart("photo") @Valid @NotNull MultipartFile photo,
-            @RequestPart("roles") @Valid @NotNull String rolesJson) {
+            @RequestPart("firstName") String firstName,
+            @RequestPart("lastName") String lastName,
+            @RequestPart("email") String email,
+            @RequestPart("password") String password,
+            @RequestPart("photo") MultipartFile photo,
+            @RequestPart("roles") String rolesJson) {
         try {
             // Create a new User object
             User user = new User();
@@ -120,7 +120,7 @@ public class UserRestController {
 
     @PutMapping("/users/{id}/enabled")
     public ResponseEntity<?> updateUserEnabledStatus(
-            @PathVariable int id, @RequestBody Map<String, Boolean> requestBody) { //just 1 field, so using Map
+            @PathVariable int id, @RequestBody Map<String, Boolean> requestBody) { // just 1 field, so using Map
         Boolean enabled = requestBody.get("enabled");
         userService.updateUserEnabledStatus(id, enabled);
         System.out.println("User enabled status updated successfully");
