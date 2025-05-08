@@ -3,8 +3,7 @@ package bt.edu.gcit.usermicroservice.entity;
 import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
+
 import bt.edu.gcit.usermicroservice.entity.AuthenticationType;
 import bt.edu.gcit.usermicroservice.entity.Country;
 
@@ -33,9 +32,11 @@ public class Customer {
     private String city;
     @Column(name = "state", nullable = false)
     private String state;
+    
     @ManyToOne
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
+
     @Column(name = "postal_code", nullable = false)
     private String postalCode;
     @Column(name = "created_time", nullable = false)

@@ -31,8 +31,9 @@ public class UserDAOImpl implements UserDAO {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return entityManager.merge(user);
     }
+
     @Override
-    public User JustSave(User user) {
+    public User justSave(User user) {
         return entityManager.merge(user);
     }
 

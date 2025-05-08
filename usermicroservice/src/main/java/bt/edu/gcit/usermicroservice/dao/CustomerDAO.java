@@ -5,7 +5,6 @@ import java.util.List;
 import bt.edu.gcit.usermicroservice.entity.AuthenticationType;
 
 public interface CustomerDAO {
-
     public Customer findByEMail(String email);
 
     public Customer findByVerificationCode(String code);

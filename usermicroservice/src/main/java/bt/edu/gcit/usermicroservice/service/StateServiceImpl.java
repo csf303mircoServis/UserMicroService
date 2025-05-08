@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import bt.edu.gcit.usermicroservice.dao.CountryDAO;
+
 import java.util.List;
 
 @Service
@@ -41,18 +42,15 @@ public class StateServiceImpl implements StateService {
     @Override
     @Transactional
     public void save(State theState, Long country_id) {
-
         Country country = countryDAO.findById(country_id);
         System.out.println("Country: " + country.getName());
         if (country == null) {
-            throw new IllegalArgumentException("Country with id " + country_id + "does not exist");
+            throw new IllegalArgumentException("Country with id " + country_id + " does not exist");
         }
-
         State state = new State();
         state.setName(theState.getName());
         state.setCountry(country);
         System.out.println("State: " + state.getCountry());
-
         stateDAO.save(state, country_id);
     }
 

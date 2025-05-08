@@ -2,6 +2,7 @@ package bt.edu.gcit.usermicroservice.rest;
 
 import bt.edu.gcit.usermicroservice.entity.User;
 import bt.edu.gcit.usermicroservice.service.UserService;
+import io.micrometer.common.lang.NonNull;
 
 import java.util.List;
 
@@ -23,9 +24,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
 import java.util.Map;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -35,6 +33,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import bt.edu.gcit.usermicroservice.entity.Role;
 import java.util.Set;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("/api")
@@ -49,12 +50,12 @@ public class UserRestController {
 
     @PostMapping(value = "/users", consumes = "multipart/form-data")
     public User save(
-            @RequestPart("firstName") String firstName,
-            @RequestPart("lastName") String lastName,
-            @RequestPart("email") String email,
-            @RequestPart("password") String password,
-            @RequestPart("photo") MultipartFile photo,
-            @RequestPart("roles") String rolesJson) {
+            @RequestPart("firstName") @Valid @NotNull(message = "First name is required.Currently it is empty") String firstName,
+            @RequestPart("lastName") @Valid @NotNull String lastName,
+            @RequestPart("email") @Valid @NotNull String email,
+            @RequestPart("password") @Valid @NotNull String password,
+            @RequestPart("photo") @Valid @NotNull MultipartFile photo,
+            @RequestPart("roles") @Valid @NotNull String rolesJson) {
         try {
             // Create a new User object
             User user = new User();
@@ -74,7 +75,7 @@ public class UserRestController {
             User savedUser = userService.save(user);
 
             // Upload the user photo
-            // System.out.println("Uploading photo" + savedUser.getId().intValue());
+            System.out.println("Uploading photo" + savedUser.getId().intValue());
             userService.uploadUserPhoto(savedUser.getId().intValue(), photo);
 
             // Return the saved user
@@ -120,11 +121,10 @@ public class UserRestController {
 
     @PutMapping("/users/{id}/enabled")
     public ResponseEntity<?> updateUserEnabledStatus(
-            @PathVariable int id, @RequestBody Map<String, Boolean> requestBody) { // just 1 field, so using Map
+            @PathVariable int id, @RequestBody Map<String, Boolean> requestBody) {
         Boolean enabled = requestBody.get("enabled");
         userService.updateUserEnabledStatus(id, enabled);
         System.out.println("User enabled status updated successfully");
         return ResponseEntity.ok().build();
     }
-
 }

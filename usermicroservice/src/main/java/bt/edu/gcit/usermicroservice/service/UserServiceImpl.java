@@ -100,7 +100,6 @@ public class UserServiceImpl implements UserService {
         User user = userDAO.findByID(id);
         if (user == null) {
             throw new UserNotFoundException("User not found with id: " + id);
-
         }
 
         if (photo.getSize() > 1024 * 1024) {
@@ -108,19 +107,27 @@ public class UserServiceImpl implements UserService {
         }
 
         String originalFilename = StringUtils.cleanPath(photo.getOriginalFilename());
+        System.out.println("Original filename: " + originalFilename);
+
         String filenameExtension = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
+        System.out.println("Filename extension: " + filenameExtension);
+
         String filenameWithoutExtension = originalFilename.substring(0, originalFilename.lastIndexOf("."));
+        System.out.println("Filename without extension: " + filenameWithoutExtension);
+
         String timestamp = String.valueOf(System.currentTimeMillis());
+        System.out.println("Timestamp: " + timestamp);
 
         String filename = filenameWithoutExtension + "_" + timestamp + "." + filenameExtension;
+        System.out.println("Generated filename: " + filename);
 
         Path uploadPath = Paths.get(uploadDir, filename);
-        ;
+        System.out.println("Upload path: " + uploadPath);
+
         photo.transferTo(uploadPath);
 
         user.setPhoto(filename);
-        userDAO.JustSave(user);
-
+        // save(user);
+        userDAO.justSave(user);
     }
-
 }

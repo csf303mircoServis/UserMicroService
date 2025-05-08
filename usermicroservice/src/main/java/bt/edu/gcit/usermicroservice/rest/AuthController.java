@@ -28,18 +28,20 @@ public class AuthController {
     private JWTUtil jwtUtil;
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> login(@RequestBody User user,
-            HttpServletResponse response) {
+    public ResponseEntity<Map<String, Object>> login(@RequestBody User user, HttpServletResponse response) {
         UserDetails userDetails = authService.login(user.getEmail(),
                 user.getPassword());
         String jwt = jwtUtil.generateToken(userDetails);
+
         // Set JWT as a cookie
         Cookie jwtCookie = new Cookie("JWT-TOKEN", jwt);
         jwtCookie.setHttpOnly(true);
         response.addCookie(jwtCookie);
+
         Map<String, Object> responseBody = new HashMap<>();
         responseBody.put("user", userDetails);
         return ResponseEntity.ok(responseBody);
+
         // Map<String, Object> response = new HashMap<>();
         // response.put("jwt", jwt);
         // response.put("user", userDetails);

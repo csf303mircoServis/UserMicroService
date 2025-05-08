@@ -6,15 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/countries")
-public class CountryRestController {
+public class countryRestController {
     private CountryService countryService;
 
     @Autowired
-    public CountryRestController(CountryService theCountryService) {
+    public countryRestController(CountryService theCountryService) {
         countryService = theCountryService;
     }
 
@@ -25,8 +26,8 @@ public class CountryRestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Country> getCountry(@PathVariable Long id) {
-        Country country = countryService.findById(id);
+    public ResponseEntity<Country> getCountry(@PathVariable int id) {
+        Country country = countryService.findById((long) id);
         return new ResponseEntity<>(country, HttpStatus.OK);
     }
 

@@ -10,7 +10,6 @@ import jakarta.persistence.TypedQuery;
 
 @Repository
 public class CountryDAOImpl implements CountryDAO {
-
     private EntityManager entityManager;
 
     @Autowired

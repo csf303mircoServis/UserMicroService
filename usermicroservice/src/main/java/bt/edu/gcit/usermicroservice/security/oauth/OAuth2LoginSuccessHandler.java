@@ -2,7 +2,6 @@ package bt.edu.gcit.usermicroservice.security.oauth;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
@@ -57,7 +56,6 @@ public class OAuth2LoginSuccessHandler extends
             return AuthenticationType.GOOGLE;
         } else if (clientName.equals("Facebook")) {
             return AuthenticationType.FACEBOOK;
-
         } else {
             return AuthenticationType.DATABASE;
         }

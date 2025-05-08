@@ -6,7 +6,6 @@ import bt.edu.gcit.usermicroservice.entity.User;
 
 public interface UserDAO {
     User save(User user);
-    User JustSave(User user);
     List<User> getAllUsers();
     User findByID(int id);
     void deleteByID(int id);
@@ -14,4 +13,5 @@ public interface UserDAO {
     // User updateUser(int id,User user);
     void updateUserEnabledStatus(int id, boolean enabled);
     User findByEmail(String email);
+    User justSave(User user);
 }

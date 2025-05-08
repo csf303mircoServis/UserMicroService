@@ -63,6 +63,7 @@ public class CustomerServiceImpl implements CustomerService {
     // public boolean verify(String code) {
     // return customerDAO.verify(code);
     // }
+
     @Override
     @Transactional
     public Customer getCustomerById(long id) {

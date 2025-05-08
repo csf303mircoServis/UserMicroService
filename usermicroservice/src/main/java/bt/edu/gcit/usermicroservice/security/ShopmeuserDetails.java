@@ -59,7 +59,6 @@ public class ShopmeuserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return user.isEnabled();
+        return true;
     }
-
 }

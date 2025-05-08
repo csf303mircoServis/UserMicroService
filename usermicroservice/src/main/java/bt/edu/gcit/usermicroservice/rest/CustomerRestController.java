@@ -8,7 +8,6 @@ import java.util.List;
 import bt.edu.gcit.usermicroservice.entity.AuthenticationType;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/api/customer")
@@ -29,10 +28,10 @@ public class CustomerRestController {
     public void sendVerificationEmail(@RequestBody String email) {
         // implementation depends on your email service
     }
-
     // @PostMapping("/verifyAccount")
     // public boolean verifyAccount(@RequestBody String code) {
     // return customerService.verify(code);
+
     // }
     @GetMapping("/code/{code}")
     public Customer findByVerificationCode(@PathVariable String code) {

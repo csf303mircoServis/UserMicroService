@@ -10,7 +10,7 @@ public interface CountryDAO {
     void save(Country country);
 
     // Read
-    Country findById(Long id);
+    Country findById(Long country_id);
 
     List<Country> findAll();
 

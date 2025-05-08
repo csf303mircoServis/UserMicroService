@@ -1,5 +1,8 @@
 package bt.edu.gcit.usermicroservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -10,6 +13,8 @@ public class State {
     private int id;
     @Column(name = "name")
     private String name;
+
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;

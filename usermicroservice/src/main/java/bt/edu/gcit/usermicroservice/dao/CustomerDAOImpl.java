@@ -60,8 +60,7 @@ public class CustomerDAOImpl implements CustomerDAO {
             customer.setCountry(country);
             System.out.println("Country: " + country.getName());
         } else {
-            // If the country is null, throw an exception or handle this case as
-            // ddappropriate
+            // If the country is null, throw an exception or handle this case as appropriate
             throw new RuntimeException("Country is null");
         }
         customer.setAuthenticationType(AuthenticationType.DATABASE);
@@ -79,20 +78,21 @@ public class CustomerDAOImpl implements CustomerDAO {
         long count = query.getSingleResult();
         return count == 0;
     }
+
     // @Override
     // public boolean verify(String code) {
-    // TypedQuery<Customer> query = entityManager.createQuery(
-    // "SELECT c FROM Customer c WHERE c.verificationCode = :code", Customer.class);
+    //     TypedQuery<Customer> query = entityManager
+    //             .createQuery("SELECT c FROMCustomer c WHERE c.verificationCode = :code", Customer.class);
+    //     query.setParameter("code", code);
+    //     Customer customer = query.getSingleResult();
+    //     if (customer != null) {
+    //         customer.setVerificationCode(true);
+    //         entityManager.merge(customer);
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
-    // query.setParameter("code", code);
-    // Customer customer = query.getSingleResult();
-    // if (customer != null) {
-    // customer.setVerificationCode(true);
-    // entityManager.merge(customer);
-    // return true;
-    // }
-    // return false;
-    // }
     @Override
     public Customer getCustomerById(long id) {
         return entityManager.find(Customer.class, id);
